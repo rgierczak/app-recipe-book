@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from "../recipe";
+import { Recipe } from "../../recipe";
 
 @Component({
     selector: 'rb-recipe-detail',
@@ -15,5 +15,4 @@ export class RecipeDetailComponent implements OnInit {
     ngOnInit() {
 
     }
-
 }
