@@ -4,9 +4,9 @@
     </div>
 </div>
 <div>
-    <div class="col-xs-12">
+    <div class="col-ms-12">
         <ul class="list-group">
-            <rb-recipe-item [recipe]="recipe" (click)="onSelected(recipe)"></rb-recipe-item>
+            <rb-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe" (click)="onSelected(recipe)"></rb-recipe-item>
         </ul>
     </div>
 </div>
