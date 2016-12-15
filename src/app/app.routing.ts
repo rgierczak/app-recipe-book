@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from "@angular/router";
-import { RecipesComponent } from './recipes/recipes.component';
+import { ModuleWithProviders } from "@angular/core";
+import { RecipesComponent } from "./recipes/recipes.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 
 const APP_ROUTES: Routes = [
@@ -19,4 +20,4 @@ const APP_ROUTES: Routes = [
 
 ];
 
-export const routing = RouterModule.forRoot(APP_ROUTES);
+export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
