@@ -40,7 +40,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     }
 
     onAddToShoppingList() {
-        this.shoppingListService.addItems(this.selectedRecipe.ingrediens);
+        this.shoppingListService.addItems(this.selectedRecipe.ingredients);
     }
 
     ngOnDestroy() {

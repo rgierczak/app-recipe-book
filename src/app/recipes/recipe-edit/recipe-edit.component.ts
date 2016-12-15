@@ -27,7 +27,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
                 private recipeService: RecipeService,
                 private formBuilder: FormBuilder,
-                private router: Router) {}
+                private router: Router) {
+    }
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe(
@@ -60,6 +61,22 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         this.navigateBack();
     }
 
+    onAddItem(name: string, amount: string) {
+        (<FormArray>this.recipeForm.controls['ingredients']).push(
+            new FormGroup({
+                name: new FormControl(name, Validators.required),
+                amount: new FormControl(amount, [
+                    Validators.required,
+                    Validators.pattern("\\d+")
+                ])
+            })
+        );
+    }
+
+    onRemoveItem(index: number) {
+        (<FormArray>this.recipeForm.controls['ingredients']).removeAt(index);
+    }
+
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
@@ -75,18 +92,16 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         let recipeIngredients: FormArray = new FormArray([]);
 
         if (!this.isNew) {
-            if (this.recipe.hasOwnProperty('ingradients')) {
-                for (let i = 0; i < this.recipe.ingrediens.length; i++) {
-                    recipeIngredients.push(
-                        new FormGroup({
-                            name: new FormControl(this.recipe.ingrediens[i].name, Validators.required),
-                            amount: new FormControl(this.recipe.ingrediens[i].amount, [
-                                Validators.required,
-                                Validators.pattern("\\d+")
-                            ])
-                        })
-                    );
-                }
+            for (let i = 0; i < this.recipe.ingredients.length; i++) {
+                recipeIngredients.push(
+                    new FormGroup({
+                        name: new FormControl(this.recipe.ingredients[i].name, Validators.required),
+                        amount: new FormControl(this.recipe.ingredients[i].amount, [
+                            Validators.required,
+                            Validators.pattern("\\d+")
+                        ])
+                    })
+                );
             }
 
             recipeName = this.recipe.name;
