@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
 import { Recipe } from './recipe';
 import { Ingredient } from '../shared/ingredient';
+import { Observable } from "rxjs/Rx";
+
+//Type your firebase link here.
+const firebaseLink = '';
 
 @Injectable()
 export class RecipeService {
@@ -12,7 +17,7 @@ export class RecipeService {
         new Recipe('Summer Salad', 'Okayish', 'http://tinyurl.com/hzjofoz', [])
     ];
 
-    constructor() {}
+    constructor(private http: Http) {}
 
     getRecipies() {
         return this.recipes;
@@ -32,5 +37,18 @@ export class RecipeService {
 
     editRecipe(oldRecipe: Recipe, newRecipe: Recipe) {
         this.recipes[this.recipes.indexOf(oldRecipe)] = newRecipe;
+    }
+
+    storeData(): Observable<any> {
+        const body = JSON.stringify(this.recipes);
+        const headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        return this.http.post(`${firebaseLink}/recipes.json`, body, { headers });
+    }
+
+    fetchData() {
+
     }
 }
