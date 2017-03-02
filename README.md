@@ -11,7 +11,7 @@ $ npm install
 ## Usage
 
 ```
-npm run start
+$ npm run start
 ```
 
 Run the project in your browser
